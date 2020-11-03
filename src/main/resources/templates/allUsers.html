@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Users List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">HOME</a>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/register">REGISTER THE NEW USER</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user">VIEW ALL USERS</a>
+            </li>
+        </ul>
+    </div>
+    <a class="navbar-brand" href="/logout">LOGOUT</a>
+</nav>
+<h1 style="margin-left: 10%">User List</h1>
+<!--<a style="margin-left: 10%" href="/register" class="btn btn-lg btn-primary" role="button">ADD_USER</a>-->
+<br/><br/>
+<div class="container text-center" th:switch="${users}">
+    <table class="table table-bordered text-center">
+        <thead class="thead-dark text-center">
+        <tr>
+            <th>ID</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>ROLES</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.roles}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form class="form-group" action="/sendUnit" style="text-align: center" method=post>
+    <div class="container col-lg-3 border" style="border-radius: 20px">
+        <h6 class="text-center">SEND UNITS TO OTHER USER</h6>
+        <div class="form-group">
+            <label for="id"></label>
+            <input type="text" class="form-control" placeholder="Enter USER_ID" name="id" id="id" required>
+        </div>
+        <div class="form-group">
+            <label for="units"></label>
+            <input type="text" class="form-control" placeholder="Enter number of units" name="units" id="units" required>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">SEND</button>
+        <div class="container singin">
+        </div>
+    </div>
+</form>
+<br>
+</body>
+</html>
