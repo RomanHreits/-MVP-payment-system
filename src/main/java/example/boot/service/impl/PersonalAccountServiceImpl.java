@@ -20,4 +20,9 @@ public class PersonalAccountServiceImpl implements PersonalAccountService {
     public PersonalAccount add(PersonalAccount account) {
         return accountRepository.save(account);
     }
+
+    @Override
+    public PersonalAccount findByAccountNumber(String accountNum) {
+        return accountRepository.findByAccountNumber(accountNum);
+    }
 }

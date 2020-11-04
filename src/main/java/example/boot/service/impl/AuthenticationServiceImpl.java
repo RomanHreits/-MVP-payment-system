@@ -30,12 +30,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User register(String email, String password) {
         User user = new User(email, password);
         Role roleName;
-        if (email.equals("roman@in.ua")) {
-            roleName = roleRepository.getByRoleName("ADMIN");
-            user.setRoles(Set.of(roleName));
-            userService.add(user);
-            return user;
-        }
         roleName = roleRepository.getByRoleName("USER");
         user.setRoles(Set.of(roleName));
         userService.add(user);

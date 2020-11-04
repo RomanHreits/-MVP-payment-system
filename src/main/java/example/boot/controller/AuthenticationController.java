@@ -24,6 +24,6 @@ public class AuthenticationController {
     @PostMapping("/add")
     public String add(@Valid UserRegistrationDto user) {
         User register = service.register(user.getEmail(), user.getPassword());
-        return "redirect:/user";
+        return "redirect:/login";
     }
 }

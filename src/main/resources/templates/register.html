@@ -1,48 +1,3 @@
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8" />-->
-<!--    <title>Add Person</title>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Create a User:</h1>-->
-
-<!--&lt;!&ndash;-->
-<!--   In Thymeleaf the equivalent of-->
-<!--   JSP's ${pageContext.request.contextPath}/edit.html-->
-<!--   would be @{/edit.html}-->
-<!--   &ndash;&gt;-->
-
-<!--<form th:action="@{/add}"-->
-<!--      th:object="${userForm}" method="POST">-->
-<!--    User Email:-->
-<!--    <input type="text" th:field="*{email}" />-->
-<!--    <br/>-->
-<!--    User Password:-->
-<!--    <input type="text" th:field="*{password}" />-->
-<!--    <br/>-->
-<!--    <input type="submit" value="Create" />-->
-<!--</form>-->
-
-<!--<h3>Send units to User</h3>-->
-<!--<form th:action="@{/sendUnit}"-->
-<!--      th:object="${account}" method="POST">-->
-<!--    User ID:-->
-<!--    <input type="text" th:field="*{id}" />-->
-<!--    <br/>-->
-<!--    Units:-->
-<!--    <input type="text" th:field="*{units}" />-->
-<!--    <br/>-->
-<!--    <input type="submit" value="Create" />-->
-<!--</form>-->
-
-<!--<br/>-->
-<!--<div th:if="${errorMessage}" th:utext="${errorMessage}"-->
-<!--     style="color:red;font-style:italic;">-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <html lang="en">
@@ -56,10 +11,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/register">REGISTER THE NEW USER</a>
+                <a class="nav-link" href="/user">VIEW ALL USERS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/user">VIEW ALL USERS</a>
+                <a class="nav-link" href="/userPage">USER_PAGE</a>
             </li>
         </ul>
     </div>
