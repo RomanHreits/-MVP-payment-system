@@ -20,26 +20,23 @@
     </div>
     <a class="navbar-brand" href="/logout">LOGOUT</a>
 </nav>
-<h1 style="margin-left: 10%">Personal Page</h1>
-<r/><br/>
-<div class="container text-center" th:switch="${response}">
+<h1 style="margin-left: 10%">User List</h1>
+<br/><br/>
+<div class="container text-center" th:switch="${accounts}">
     <table class="table table-bordered text-center">
         <thead class="thead-dark text-center">
         <tr>
             <th>ID</th>
-            <th>EMAIL</th>
-            <th>PASSWORD</th>
-            <th>UNITS</th>
             <th>ACCOUNT_NUMBER</th>
+            <th>UNITS</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="userDto : ${response}">
-            <td th:text="${userDto.id}"></td>
-            <td th:text="${userDto.email}"></td>
-            <td th:text="${userDto.password}"></td>
-            <td th:text="${userDto.units}"></td>
-            <td th:text="${userDto.accountNumber}"></td>
+        <tr th:each="account : ${accounts}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.roles}"></td>
         </tr>
         </tbody>
     </table>

@@ -4,4 +4,5 @@ import example.boot.entity.PersonalAccount;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PersonalAccountRepository extends CrudRepository<PersonalAccount, Long> {
+    PersonalAccount findByAccountNumber(String accountNumber);
 }

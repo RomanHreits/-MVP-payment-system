@@ -6,4 +6,6 @@ public interface PersonalAccountService {
     PersonalAccount get(Long id);
 
     PersonalAccount add(PersonalAccount account);
+
+    PersonalAccount findByAccountNumber(String accountNum);
 }

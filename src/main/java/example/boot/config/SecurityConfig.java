@@ -1,10 +1,8 @@
 package example.boot.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,39 +23,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+    @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .headers()
-                .frameOptions().disable()
-                .and()
-                .csrf().disable()
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .antMatchers("/h2-console/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/register").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/add").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.GET, "/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST, "/sendUnit").hasRole("USER")
-                .antMatchers(HttpMethod.GET, "/userPage").hasRole("USER")
-                .anyRequest()
-                .authenticated()
+                //Доступ для не зарегистрированных пользователей
+                .antMatchers("/add", "/register", "/").permitAll()
+                //Все остальные страницы требуют аутентификации
+                .anyRequest().authenticated()
                 .and()
+                //Настройка для входа в систему
                 .formLogin()
+                .loginPage("/login")
+                //Перенарпавление на главную страницу после успешного входа
+                .defaultSuccessUrl("/userPage", true)
+                .failureUrl("/login.html?error=true")
+                .permitAll()
                 .and()
-                .httpBasic();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(userDetailsService);
-        return provider;
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/");
     }
 }
